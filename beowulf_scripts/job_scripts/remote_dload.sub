@@ -1,0 +1,8 @@
+#!/bin/bash 
+#$ -N remote_dload
+#$ -S /bin/bash
+#$ -cwd
+#$ -o $HOME/scripts/outputs
+#$ -e $HOME/scripts/outputs
+. /etc/profile.d/modules.sh
+bash remote_dload.sh $1

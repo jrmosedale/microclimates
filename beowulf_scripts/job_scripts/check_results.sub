@@ -1,0 +1,10 @@
+#!/bin/bash 
+#$ -N analyse_year
+#$ -S /bin/bash
+#$ -cwd
+#$ -o $HOME/scripts/outputs
+#$ -e $HOME/scripts/outputs
+
+
+bash check_results.sh $1
+

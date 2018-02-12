@@ -1,0 +1,67 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 TimesNewRomanPSMT;\f2\froman\fcharset0 Times-Roman;
+\f3\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10300\viewh16220\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 Max/Min - 09-09h so different days min=day-1\
+\
+1. Normalised vs  long term average (61-90) accounts for most topographical effects\
+\
+2. Regression - using only spatial terms i.e. easting/northing. 
+\f1\fs30 \expnd0\expndtw0\kerning0
+Terms up to a power of 3 (10 parameters) were used when greater flexibility in the spatial trend surface was required, e.g. for rainfall and temperature. 
+\f2\fs24 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f1\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\
+3. Interpolation - Power of weighting factor: Higher power increases smoothing around high residual stations. Maximum, minimum, mean, and grass minimum temperature were analysed using a power of two.
+\f0\fs24 \kerning1\expnd0\expndtw0  Radius = 100-150km.\
+Custom IDW method used for temp. 
+\f1\fs30 \expnd0\expndtw0\kerning0
+Infinite weighting at station locations was only removed for maximum, minimum and mean temperature (i.e. surface not obliged to pass through station values?)\
+\
+Lowest error for mean temperatures\
+\
+\pard\pardeftab720\sa240
+\cf0 \expnd0\expndtw0\kerning0
+\'91days exceeding a threshold\'92 variable, which is subject to increased random variations 
+\f2\fs24 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \expnd0\expndtw0\kerning0
+\
+Q interpolate locally from mid point altitude or from 5km grid square average???\
+\
+Downscaling 5km temperature to 100m grid\
+\pard\pardeftab720
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+Apply an IDW interpolation and correcting for elevation differences
+\f2\fs24 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \expnd0\expndtw0\kerning0
+Altitude effect = 
+\f3\fs20 \kerning1\expnd0\expndtw0 temperature declines with altitude at a rate of 9.8
+\f1 \'ba
+\f3 C per 100m
+\f2\fs24 \expnd0\expndtw0\kerning0
+\
+
+\f0 \kerning1\expnd0\expndtw0 \
+http://marswiki.jrc.ec.europa.eu/agri4castwiki/index.php/Interpolation_of_forecasted_weather \
+\
+http://gis.stackexchange.com/questions/29443/interpolating-and-infilling-a-raster-from-5km-pixels-to-100m-pixels-in-arcmap-10 \
+\
+\
+From: http://www.metoffice.gov.uk/climatechange/science/monitoring/ukcp09/faq.html#faq1.20 \
+
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 When deciding which data are relevant to your chosen location, please bear in mind that the 
+\b 5km values are estimates for the centre point of a 5\'a0x\'a05\'a0km grid cell
+\b0 , whereas the 25\'a0km values are estimates of the average over a 25\'a0x\'a025\'a0km grid box.}

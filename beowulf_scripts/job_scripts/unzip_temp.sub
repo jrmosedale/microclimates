@@ -1,0 +1,15 @@
+#!/bin/bash OR !/bin/sh
+#$ -N unzip_temp
+#$ -S /bin/bash
+#$ -cwd
+#$ -o $HOME/output
+
+#Merge the standard out and standard error to one file 
+##$ -j y 
+
+# Send mail at submission and completion of script
+##$ -m be
+##$ -M J.Mosedale@exeter.ac.uk
+
+
+bash unzip_temp.sh 

@@ -1,0 +1,15 @@
+#!/bin/bash 
+#$ -N t5km_year_stats
+#$ -S /bin/bash
+#$ -cwd
+#$ -o $HOME/scripts/outputs
+#$ -e $HOME/scripts/outputs
+# Send mail at submission and completion of script
+##$ -m be
+##$ -M J.Mosedale@exeter.ac.uk
+. /etc/profile.d/modules.sh
+module load shared gdal
+module load shared R
+which Rscript
+bash t5km_year_stats.sh $1
+

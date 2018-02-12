@@ -1,0 +1,11 @@
+#!/bin/bash 
+#$ -N job_map24h
+#$ -S /bin/bash
+#$ -cwd
+#$ -o $HOME/scripts/outputs
+#$ -e $HOME/scripts/outputs
+# Send mail at submission and completion of script
+##$ -m be
+##$ -M J.Mosedale@exeter.ac.uk
+bash job_map24h.sh
+

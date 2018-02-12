@@ -1,0 +1,87 @@
+
+Carson texts
+
+Pass env var to job: # qsub -v MYVAR="test" script.sh
+
+
+SUBMISSION SIMPLE JOBS
+qsub -m ae -M email@address -o output.file -e error.file script.sh
+
+Or with a variable
+qsub -v VAR=“txt” script.sh
+
+Most of these options could be included in job script
+
+
+SUBMISSION Job arrays - same prog multiple files - use job index
+
+1. From commnad line: 
+
+# qsub -t 1-number_jobs -tc 100 jobscript  (max number of jobs at time of 100)
+
+Refer to $SGE_TSK_ID variable in shell script
+
+E.g:
+./yourprogram yourinputs.$SGE_TASK_ID yourresults.$SGE_TASK_ID
+
+while referencing  $SGE_TASK_ID environment variable in yourjob.sh. (shell script)
+
+e.g.: ./yourprogram yourinputs.$SGE_TASK_ID yourresults.$SGE_TASK_ID
+
+
+Ref: https://wiki.exeter.ac.uk/display/carson/Submitting+Array+Jobs
+
+
+JOB SHELL SCRIPT = process.sub
+#!/bin/bash OR !/bin/sh
+#$ -N jobname
+#$ -S /bin/bash
+#$ -cwd
+
+# Send mail at submission and completion of script
+##$ -m be
+##$ -M jm622@exeter.ac.uk
+
+EITHER
+./etc/profile.d/modules.sh
+module add shared R
+which Rscript
+Rscript progname.r
+
+OR
+./etc/profile.d/modules.sh
+module add shared R
+bash processscript.sh $1 # $1 comes from command line submission
+
+
+PROCESSING SCRIPT = process.sh
+#!/bin/bash
+
+#SGE_TASK_ID=1
+
+if [[ -n "$SGE_TASK_ID" ]] ; then
+  WKDIR=~/tutorial/gdal/hillshade
+  INPUT="$WKDIR/Input"
+  OUTPUT="$WKDIR/Output"
+  echo "Working directory = $WKDIR"
+  cd $WKDIR
+  #Read row from MYVAR file
+  echo "SGE_TASK_ID = $SGE_TASK_ID"
+  MYVAR=`sed -n $SGE_TASK_ID\p $1`
+  #Two examples reading 2nd column's value (1st col = task ID)
+  #echo $MYVAR | awk -F , '{print $2}'
+  #echo $MYVAR | cut -d, -f2
+  INPUTFILE=`echo $MYVAR | cut -d, -f2`
+  echo "Processing file '$INPUTFILE'"
+
+  #Processing commands
+  gdalinfo $INPUT/$INPUTFILE
+  gdaldem hillshade $INPUT/$INPUTFILE $OUTPUT/$INPUTFILE"_"hillshade.tif -z 1.0 -s 1.0 -az 315.0 -alt 45.0 -of GTiff
+  #sleep 10
+else
+  echo "\$SGE_TASK_ID is not defined ... script is not running as part of job array"
+fi
+
+
+CALL PROCESS SCRIPT WITH  commnad line: # qsub -t 1-number_jobs -tc 100 jobscript
+
